@@ -7,20 +7,25 @@
 
 <!-- Basic Page Needs -->
 <meta charset="utf-8">
-  <title>Columbus Concerts</title>
+  <title>What's happening?</title>
   <meta name="description" content="Check out today's concerts in Columbus!">
   <meta name="author" content="Kevin McCraney">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-<!--CSS-->
-<!--<link rel="stylesheet" href="css/leaflet.css" />
-<link rel="stylesheet" href="css/style.css" />-->
+<!--CSS, using jinja templating URLs-->
  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
 </head>
 
 <body>
-    <div class = "titlebox"><h1>Columbus Concerts</h1></div>
+    <div class="btn-group">
+    <h1>What's happening...</h1>
+    <button type="button" id="today" class="btn btn-primary btn-lg">Today</button>
+    <button type="button" id="tomorrow" class="btn btn-info btn-lg">Tomorrow</button>
+    <button type="button" id="later" class="btn btn-success  btn-lg">Later</button>
+    <button type="button" id="all" class="btn btn-danger  btn-lg">See All</button>
+</div>
 <div id="map"></div>
 
 

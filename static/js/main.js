@@ -21,7 +21,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // using browser geolocation features, shows user their relative location
-map.locate({setView: true, maxZoom: 19});
+map.locate({setView: true, maxZoom: 13});
 
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
@@ -38,25 +38,49 @@ map.on('locationfound', onLocationFound);
 function onLocationError(e) {
     alert(e.message);
 }
-map.on('locationerror', onLocationError).setView([39.9975, -83.0074], 16);
+map.on('locationerror', onLocationError).setView([39.9975, -83.0074], 13);
 
 
 // Using the core $.ajax() method
-var createMarkers = $.getJSON( 'http://api.seatgeek.com/2/events?geoip=true', 'datetime_utc.gte=' + today, function(data){
+var promise = $.getJSON( 'http://api.seatgeek.com/2/events?geoip=true');
+promise.then(function(data){
+    var events = data.events;
+    console.log(events);
+    $.each(events, function(i){
 
-    for (var i=0; i < data.length; i++){
-            console.log(data);
-            var events = data.events;
+            var marker = L.marker( [events[i]['venue']['location']['lat'], events[i]['venue']['location']['lon']]).addTo(map)
+            .bindPopup('<h5>' +events[i]['title']+ ' at '+events[i]['venue']['name'] + '</h5>  starting at ' + events[i]['datetime_local'].slice(11, 16) + ". Don't be late!")
+            .addTo(map)
+            .on('mouseover', function(){
+                this.openPopup();
+            });
 
-        var marker = L.marker( [events[i].venue.location.lat, events[i].venue.location.lon], {icon: L.mapbox.marker.icon} )
-        .addTo(map)
-        .bindPopup('<h3>' +events[i].title+ '</h3> at '+events[i].venue.name + ' ' + events[i].datetime_local)
-        .addTo(map).openPopup();
+    });
 
+});
 
+//jquery button selection, not yet implemented
+$("#today").click(function(){
+});
 
+$("#tomorrow").click(function(){
+    map.addLayer(tomorrow);
+    map.removeLayer(today);
+    map.removeLayer(later);
+});
 
-}});
+$("#later").click(function(){
+    map.addLayer(later);
+    map.removeLayer(tomorrow);
+    map.removeLayer(today);
+});
+
+$("#all").click(function(){
+    map.addLayer(today);
+    map.addLayer(tomorrow);
+    map.addLayer(later);
+});
+
 
 
 // create markers
