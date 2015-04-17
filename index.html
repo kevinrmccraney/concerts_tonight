@@ -7,7 +7,7 @@
 
 <!-- Basic Page Needs -->
 <meta charset="utf-8">
-  <title>What's happening?</title>
+  <title>Concerts Tonight - What's happening where you are?</title>
   <meta name="description" content="Check out today's concerts in Columbus!">
   <meta name="author" content="Kevin McCraney">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -15,23 +15,16 @@
 <!--CSS, using jinja templating URLs-->
  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "css/style.css">
 </head>
 
 <body>
-    <div class="btn-group">
-    <h1>What's happening...</h1>
-    <button type="button" id="today" class="btn btn-primary btn-lg">Today</button>
-    <button type="button" id="tomorrow" class="btn btn-info btn-lg">Tomorrow</button>
-    <button type="button" id="later" class="btn btn-success  btn-lg">Later</button>
-    <button type="button" id="all" class="btn btn-danger  btn-lg">See All</button>
-</div>
 <div id="map"></div>
 
 
   <!-- Load JS files -->
   <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-*.pyc
+*.png
+*.jpg
+*.jpeg
 .DS_STORE
-secret_data.txt
-
